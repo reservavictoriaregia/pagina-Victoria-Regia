@@ -19,6 +19,10 @@
   }
   body{font-family:var(--ff-body);font-weight:400;font-size:var(--fs-body);background:var(--negro-carbon);color:var(--marfil);overflow-x:hidden}
 
+  /* BLUR GLOBAL — afecta todas las secciones */
+  .hbg,#nosotros-wrap,#experiencias-wrap,#seccion-validacion,footer{transition:filter .4s ease,transform .4s ease;will-change:filter}
+  body.blur-bg .hbg,body.blur-bg #nosotros-wrap,body.blur-bg #experiencias-wrap,body.blur-bg #seccion-validacion,body.blur-bg footer{filter:blur(10px) brightness(.88);transform:scale(1.01)}
+
   /* NAV */
   nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nh);background:rgba(17,19,24,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center}
   .ni{width:100%;max-width:var(--max);padding:0 24px;display:flex;align-items:center;justify-content:space-between}
@@ -77,14 +81,12 @@
 
   /* HERO */
   .hero{position:relative;width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .hbg{position:absolute;inset:0;background:url('assets/wallpaperhero.jpg') center/cover no-repeat var(--negro-carbon);transition:filter .6s ease,transform .6s ease;will-change:filter,transform}
-  body.blur-bg .hbg{filter:blur(10px) brightness(.92);transform:scale(1.03)}
+  .hbg{position:absolute;inset:0;background:url('assets/wallpaperhero.jpg') center/cover no-repeat var(--negro-carbon);will-change:filter,transform}
   .hero-band{position:relative;z-index:2;width:100%;padding:60px 24px 56px;display:flex;flex-direction:column;align-items:center;animation:heroIn 1.8s cubic-bezier(.16,1,.3,1) both}
   @keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
   .hlo{text-align:center}
   .hlo img{width:clamp(280px,42vw,560px);max-width:100%;filter:drop-shadow(0 4px 32px rgba(17,19,24,.5))}
   .hlo .ft{font-family:var(--ff-display);font-weight:600;font-size:clamp(3rem,7vw,5.5rem);color:var(--blanco);line-height:1;letter-spacing:.06em;text-shadow:0 2px 40px rgba(17,19,24,.7)}
-  .hlo .ft span{display:block;font-family:var(--ff-display);font-size:.45em;letter-spacing:.4em;font-weight:400;margin-top:.15em;opacity:.85}
   .hero-tagline{font-family:var(--ff-body);font-size:clamp(13px,1.6vw,var(--fs-body));font-weight:300;color:rgba(245,241,232,.88);letter-spacing:.14em;margin-top:18px;text-align:center}
   .hero-btns{display:flex;gap:14px;justify-content:center;margin-top:32px;flex-wrap:wrap;width:100%}
   .hero-btn-primary{font-family:var(--ff-body);font-size:var(--fs-ui);font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--blanco);border:none;border-radius:100px;cursor:pointer;padding:15px 38px;text-decoration:none;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--verde-esmeralda) 0%,var(--verde-selva) 100%);box-shadow:0 4px 16px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.15);transition:transform .22s ease,box-shadow .22s ease}
@@ -96,24 +98,20 @@
   .hero-btn-secondary:hover{color:var(--blanco);border-color:rgba(245,241,232,.75);transform:translateY(-2px)}
   .hero-btn-secondary:hover::before{opacity:1}
 
-  /* SECCIÓN LOTO */
-  #sec-loto{position:relative;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#ffffff;perspective:1000px;transform-style:preserve-3d}
-  .sl-bg{position:absolute;inset:-15%;background:url('assets/wallpaperhero2.jpg') center/cover no-repeat;filter:brightness(1);transform-style:preserve-3d;transition:transform .08s linear;will-change:transform}
-  .sl-overlay{display:none}
-  .sl-content{position:relative;z-index:2;text-align:center;padding:0 24px}
-  @media(max-width:680px){#sec-loto{display:none !important}}
+  /* CURSOR — solo desktop */
+  .cur-dot,.cur-ring{display:none}
+  @media(hover:hover) and (pointer:fine){
+    *{cursor:none !important}
+    .cur-dot{display:block;position:fixed;z-index:9999;pointer-events:none;width:6px;height:6px;border-radius:50%;background:#FFFFFF;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:transform .1s ease,width .25s ease,height .25s ease;will-change:left,top}
+    .cur-ring{display:block;position:fixed;z-index:9998;pointer-events:none;width:32px;height:32px;border-radius:50%;border:1.5px solid #FFFFFF;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:width .3s ease,height .3s ease,opacity .3s ease;will-change:left,top}
+    body.cur-hover .cur-dot{width:10px;height:10px}
+    body.cur-hover .cur-ring{width:44px;height:44px}
+    body.cur-click .cur-dot{transform:translate(-50%,-50%) scale(.6)}
+    body.cur-click .cur-ring{width:20px;height:20px;opacity:.4}
+  }
 
-  /* CURSOR */
-  *{cursor:none !important}
-  .cur-dot{position:fixed;z-index:9999;pointer-events:none;width:6px;height:6px;border-radius:50%;background:#FFFFFF;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:transform .1s ease,width .25s ease,height .25s ease;will-change:left,top}
-  .cur-ring{position:fixed;z-index:9998;pointer-events:none;width:32px;height:32px;border-radius:50%;border:1.5px solid #FFFFFF;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:width .3s ease,height .3s ease,opacity .3s ease;will-change:left,top}
-  body.cur-hover .cur-dot{width:10px;height:10px}
-  body.cur-hover .cur-ring{width:44px;height:44px}
-  body.cur-click .cur-dot{transform:translate(-50%,-50%) scale(.6)}
-  body.cur-click .cur-ring{width:20px;height:20px;opacity:.4}
-
-  /* NOSOTROS */
-  #nosotros-wrap{transition:background .6s ease}
+  /* NOSOTROS / HISTORIA */
+  #nosotros-wrap{transition:background .6s ease,filter .4s ease,transform .4s ease}
   #nosotros-wrap.tema-pasado{background:var(--marfil)}
   #nosotros-wrap.tema-actualidad{background:var(--blanco)}
   #nuestra-historia{width:100%;position:relative;overflow:hidden}
@@ -258,25 +256,46 @@
   .exp-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(245,241,232,.07);border:1px solid rgba(245,241,232,.1);color:rgba(245,241,232,.5);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
   .exp-modal-close:hover{background:rgba(245,241,232,.14);color:var(--blanco)}
 
-  /* VALIDACIÓN */
-  #seccion-validacion{width:100%;background:var(--negro-carbon);padding:80px 0 100px}
-  .val-inner{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
-  .val-title{font-family:var(--ff-display);font-weight:600;font-size:clamp(1.8rem,3vw,var(--fs-h2));color:var(--marfil);letter-spacing:.08em;text-align:center;margin-bottom:10px;line-height:1.2}
-  .val-sub{font-family:var(--ff-body);font-size:13px;font-weight:300;color:rgba(245,241,232,.5);text-align:center;letter-spacing:.06em;margin-bottom:48px}
-  .val-map{width:100%;margin-bottom:40px}
-  .val-map iframe{width:100%;height:500px;border:none;border-radius:20px;display:block}
-  .val-reviews-title{font-family:var(--ff-body);font-size:var(--fs-legal);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,241,232,.35);text-align:center;margin-bottom:24px}
-  .val-rating-badge{display:flex;flex-direction:column;align-items:center;margin-bottom:32px;gap:6px}
-  .val-rating-num{font-family:var(--ff-display);font-weight:700;font-size:var(--fs-display);color:#f5c842;line-height:1}
-  .val-rating-count{font-family:var(--ff-body);font-size:13px;font-weight:300;color:rgba(245,241,232,.5);margin-bottom:12px}
-  .val-rating-link{font-family:var(--ff-body);font-size:13px;font-weight:400;color:var(--marfil);text-decoration:underline;transition:color .2s}
-  .val-rating-link:hover{color:var(--verde-tropical)}
-  #valReviews{display:flex;gap:20px;overflow-x:auto;padding-bottom:20px;scrollbar-width:thin}
-  .val-review{flex:1;min-width:280px;background:rgba(245,241,232,.05);padding:24px;border-radius:16px;border:.5px solid rgba(245,241,232,.08);transition:background .2s;text-align:left}
-  .val-review:hover{background:rgba(245,241,232,.08)}
-  .val-review-stars{color:#fbbc04;font-size:14px;letter-spacing:2px;margin-bottom:10px}
-  .val-review-text{font-family:var(--ff-body);font-size:13.5px;font-weight:300;color:rgba(245,241,232,.78);line-height:1.6}
-  .val-review-author{font-family:var(--ff-body);font-size:12px;font-weight:500;color:rgba(245,241,232,.5);margin-top:15px;letter-spacing:.05em}
+  /* ENCUÉNTRANOS — rediseñado */
+  #seccion-validacion{position:relative;width:100%;background:var(--negro-carbon);padding:96px 0 100px;overflow:hidden}
+  #seccion-validacion::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:140%;height:380px;background:radial-gradient(ellipse at center top,rgba(0,143,69,.12) 0%,transparent 60%);pointer-events:none}
+  .val-inner{position:relative;width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+  .val-eyebrow{font-family:var(--ff-body);font-size:var(--fs-legal);font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--verde-tropical);text-align:center;margin-bottom:14px}
+  .val-title{font-family:var(--ff-display);font-weight:700;font-size:clamp(2rem,3.5vw,var(--fs-h1));color:var(--marfil);letter-spacing:.06em;text-align:center;margin-bottom:12px;line-height:1.1}
+  .val-line{width:80px;height:2px;margin:0 auto 16px;background:linear-gradient(90deg,var(--verde-selva),var(--verde-tropical));border-radius:2px}
+  .val-sub{font-family:var(--ff-body);font-size:14px;font-weight:300;color:rgba(245,241,232,.55);text-align:center;letter-spacing:.06em;margin-bottom:56px}
+
+  .val-map-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-bottom:64px}
+  .val-map{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);border:1px solid rgba(245,241,232,.08);min-height:440px}
+  .val-map iframe{width:100%;height:100%;min-height:440px;border:none;display:block;filter:grayscale(.2) brightness(.95)}
+  .val-info-card{background:rgba(17,19,24,.45);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(245,241,232,.08);border-radius:24px;padding:32px 28px;display:flex;flex-direction:column;gap:24px;filter:drop-shadow(0 8px 20px rgba(17,19,24,.3))}
+  .val-info-block{display:flex;flex-direction:column;gap:6px}
+  .val-info-label{font-family:var(--ff-body);font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--verde-tropical)}
+  .val-info-val{font-family:var(--ff-body);font-size:14px;font-weight:400;color:var(--marfil);line-height:1.55}
+  .val-info-cta{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+  .val-info-btn{font-family:var(--ff-body);font-size:var(--fs-ui);font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--blanco);text-decoration:none;text-align:center;padding:13px 24px;border-radius:100px;background:linear-gradient(135deg,var(--verde-esmeralda),var(--verde-selva));box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .22s,box-shadow .22s}
+  .val-info-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,143,69,.4)}
+  .val-info-btn-ghost{font-family:var(--ff-body);font-size:var(--fs-ui);font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.85);text-decoration:none;text-align:center;padding:12px 24px;border-radius:100px;border:1px solid rgba(245,241,232,.25);transition:all .22s}
+  .val-info-btn-ghost:hover{border-color:rgba(245,241,232,.5);color:var(--blanco);background:rgba(245,241,232,.05)}
+
+  .val-rating-badge{display:flex;flex-direction:column;align-items:center;margin-bottom:40px;gap:6px}
+  .val-rating-stars-big{color:#f5c842;font-size:22px;letter-spacing:4px;margin-bottom:6px}
+  .val-rating-num{font-family:var(--ff-display);font-weight:700;font-size:clamp(3rem,6vw,5rem);color:var(--marfil);line-height:1;margin-bottom:6px}
+  .val-rating-count{font-family:var(--ff-body);font-size:13px;font-weight:300;color:rgba(245,241,232,.5);margin-bottom:14px;letter-spacing:.04em}
+  .val-rating-link{font-family:var(--ff-body);font-size:12px;font-weight:400;color:var(--verde-tropical);text-decoration:none;letter-spacing:.06em;padding:8px 18px;border:1px solid rgba(51,178,73,.4);border-radius:100px;transition:all .22s}
+  .val-rating-link:hover{background:rgba(51,178,73,.1);border-color:var(--verde-tropical)}
+
+  #valReviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .val-review{position:relative;background:rgba(17,19,24,.45);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(245,241,232,.08);padding:28px 24px 24px;border-radius:20px;display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(20px);transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .5s ease,box-shadow .3s ease;filter:drop-shadow(0 8px 20px rgba(17,19,24,.3))}
+  .val-review.revealed{opacity:1;transform:none}
+  .val-review:hover{transform:translateY(-4px)}
+  .val-review-quote{position:absolute;top:18px;right:22px;font-family:var(--ff-display);font-size:48px;font-weight:700;color:rgba(51,178,73,.18);line-height:1;pointer-events:none}
+  .val-review-stars{color:#f5c842;font-size:13px;letter-spacing:2px}
+  .val-review-text{font-family:var(--ff-body);font-size:13.5px;font-weight:300;color:rgba(245,241,232,.82);line-height:1.7;flex:1}
+  .val-review-author-wrap{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid rgba(245,241,232,.08)}
+  .val-review-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--verde-esmeralda),var(--verde-selva));display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:15px;font-weight:600;color:var(--marfil);flex-shrink:0}
+  .val-review-author{font-family:var(--ff-body);font-size:12.5px;font-weight:500;color:var(--marfil);letter-spacing:.02em}
+  .val-review-author small{display:block;font-weight:300;font-size:11px;color:rgba(245,241,232,.4);margin-top:2px}
 
   /* FOOTER */
   footer{background:#0a0d10;border-top:1px solid rgba(245,241,232,.06);padding:56px 0 32px}
@@ -286,7 +305,7 @@
   .fb .fn{font-family:var(--ff-display);font-weight:600;font-size:18px;color:rgba(245,241,232,.7);margin-bottom:14px;letter-spacing:.04em}
   .ft3{font-family:var(--ff-body);font-size:13px;font-weight:300;line-height:1.7;color:rgba(245,241,232,.4);max-width:180px}
   .fc-t{font-family:var(--ff-body);font-size:var(--fs-legal);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,241,232,.35);margin-bottom:14px}
-  .fc a{display:block;font-family:var(--ff-body);font-size:12px;font-weight:400;color:rgba(245,241,232,.5);text-decoration:none;padding:3px 0;transition:color .15s}
+  .fc a{display:block;font-family:var(--ff-body);font-size:12px;font-weight:400;color:rgba(245,241,232,.5);text-decoration:none;padding:3px 0;transition:color .15s;background:none;border:none;cursor:pointer;text-align:left}
   .fc a:hover{color:rgba(245,241,232,.9)}
   .fb2{display:flex;align-items:center;justify-content:space-between;padding-top:24px;flex-wrap:wrap;gap:10px}
   .fc2{font-family:var(--ff-body);font-size:11px;font-weight:400;color:rgba(245,241,232,.3)}
@@ -295,6 +314,11 @@
   .fl a:hover{color:rgba(245,241,232,.6)}
 
   /* RESPONSIVE */
+  @media(max-width:920px){
+    .val-map-wrap{grid-template-columns:1fr;gap:16px}
+    .val-map,.val-map iframe{min-height:340px}
+    #valReviews{grid-template-columns:1fr}
+  }
   @media(max-width:680px){
     :root{--nh:48px}
     .nl{display:none}.hbtn{display:flex}.ni{padding:0 16px}
@@ -308,10 +332,11 @@
     .hs-wrap{padding:calc(var(--nh) + 40px) 0 60px;min-height:100dvh}
     .hs-title{font-size:2.2rem;margin-bottom:24px}
     .hs-opt{padding:8px 20px;font-size:12px}
-    .hs-cards{flex-wrap:nowrap;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding:24px 20px 28px;scrollbar-width:none;margin-top:14px;gap:14px}
+    .hs-cards{flex-wrap:nowrap;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding:24px 0 28px;scrollbar-width:none;margin-top:14px;gap:0}
     .hs-cards::-webkit-scrollbar{display:none}
-    .hs-card{min-width:78vw;flex-shrink:0;scroll-snap-align:center}
-    .hs-card-img{height:200px}
+    .hs-card{min-width:100vw;flex-shrink:0;scroll-snap-align:center;border-radius:0;padding:0 16px;background:transparent}
+    .hs-card::before{left:16px;right:16px;border-radius:20px}
+    .hs-card-img{height:200px;border-radius:0}
     .hs-card-body{padding:18px 16px 22px}
     .hs-card-title{font-size:19px}
     .hs-card-text{font-size:12.5px}
@@ -321,33 +346,33 @@
     .mf-p{font-size:14px;line-height:1.75}
     .mf-cards{flex-direction:column;gap:14px;margin-top:36px}
     .mf-card-body{padding:22px 20px}
-    .exp-scene{min-height:420px}
-    .exp-track{width:58vw;height:380px}
-    .exp-card{width:58vw;height:380px}
-    .exp-card-img{height:160px}
-    .exp-card-body{padding:14px 14px 16px}
-    .exp-card-badge{font-size:9px;margin-bottom:4px}
-    .exp-card-title{font-size:14px;margin-bottom:5px}
-    .exp-card-text{font-size:11px;line-height:1.5;overflow:hidden;max-height:4em}
-    .exp-card-footer{margin-top:8px;padding-top:8px;gap:6px}
-    .exp-card-meta{font-size:10px}
-    .exp-card.pos-right1{transform:translateX(52vw) rotateY(-44deg) scale(0.8);opacity:.5}
-    .exp-card.pos-right2{transform:translateX(92vw) rotateY(-65deg) scale(0.6);opacity:.15}
-    .exp-card.pos-left1{transform:translateX(-52vw) rotateY(44deg) scale(0.8);opacity:.5}
-    .exp-card.pos-left2{transform:translateX(-92vw) rotateY(65deg) scale(0.6);opacity:.15}
+    #experiencias-wrap{background-attachment:scroll}
+    .exp-header{padding:calc(var(--nh) + 40px) 20px 24px}
+    .exp-scene{min-height:440px}
+    .exp-track{width:72vw;max-width:300px;height:420px}
+    .exp-card{width:72vw;max-width:300px;height:420px}
+    .exp-card-img{height:200px}
+    .exp-card-body{padding:16px 16px 18px}
+    .exp-card-title{font-size:18px}
+    .exp-card-text{font-size:12px;max-height:5.4em}
+    .exp-card.pos-right1{transform:translateX(68vw) rotateY(-44deg) scale(0.78);opacity:.45}
+    .exp-card.pos-right2{transform:translateX(120vw) rotateY(-65deg) scale(0.6);opacity:.12}
+    .exp-card.pos-left1{transform:translateX(-68vw) rotateY(44deg) scale(0.78);opacity:.45}
+    .exp-card.pos-left2{transform:translateX(-120vw) rotateY(65deg) scale(0.6);opacity:.12}
+    .exp-modal{padding:16px}
     .exp-modal-inner{flex-direction:column;max-height:92vh}
     .exp-modal-img{width:100%;height:180px;flex-shrink:0}
-    .exp-modal-info{padding:20px 18px}
+    .exp-modal-info{padding:24px 20px}
     .exp-modal-title{font-size:1.2rem}
     .exp-modal-desc{font-size:13px}
-    #seccion-validacion{padding:56px 0 72px}
+    #seccion-validacion{padding:64px 0 80px}
     .val-inner{padding:0 16px}
-    .val-title{font-size:1.7rem}
-    .val-sub{font-size:12px;margin-bottom:32px}
-    .val-map iframe{height:360px;border-radius:14px}
+    .val-title{font-size:1.8rem}
+    .val-sub{font-size:12px;margin-bottom:36px}
+    .val-map iframe,.val-map{min-height:300px;border-radius:18px}
+    .val-info-card{padding:24px 20px}
     .val-rating-num{font-size:3rem}
-    #valReviews{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 4px 20px;gap:14px}
-    .val-review{min-width:80vw;scroll-snap-align:center;padding:20px}
+    .val-review{padding:22px 20px}
     .val-review-text{font-size:13px}
     footer{padding:48px 0 24px}
     .fi2{padding:0 20px}
@@ -364,20 +389,9 @@
     .hero-tagline{font-size:10.5px}
     .hs-title{font-size:1.9rem}
     .mf-title{font-size:1.7rem}
-    .val-title{font-size:1.5rem}
+    .val-title{font-size:1.55rem}
     .ft2{grid-template-columns:1fr}
   }
-
-  /* DESACTIVAR CURSOR PERSONALIZADO EN DISPOSITIVOS TÁCTILES */
-  @media (pointer: coarse), (max-width: 680px) {
-    * { 
-      cursor: auto !important; 
-    }
-    .cur-dot, .cur-ring { 
-      display: none !important; 
-    }
-  }
-
   </style>
 </head>
 <body>
@@ -437,7 +451,7 @@
   </div>
   <div class="mob-section">
     <button class="mob-section-btn" onclick="toggleMob(this)">Experiencias<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-    <div class="mob-sub"><a href="#" onclick="openExperiencias()">Actividades y Planes</a><a href="#">Galería Inmersiva</a></div>
+    <div class="mob-sub"><a href="#">Actividades y Planes</a></div>
   </div>
   <div class="mob-section">
     <button class="mob-section-btn" onclick="toggleMob(this)">Operadores<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -455,7 +469,7 @@
   <div class="hero-band">
     <div class="hlo">
       <img src="assets/logo-blanco-vr.png" alt="Victoria Regia" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <div class="ft" style="display:none">Victoria<span>Regia</span></div>
+      <div class="ft" style="display:none">Victoria Regia</div>
     </div>
     <p class="hero-tagline">Selva viva &nbsp;·&nbsp; Amazonas colombiano</p>
     <div class="hero-btns">
@@ -464,12 +478,6 @@
     </div>
   </div>
 </div>
-
-<!-- SECCIÓN LOTO -->
-<section id="sec-loto">
-  <div class="sl-bg"></div>
-  <div class="sl-content"></div>
-</section>
 
 <!-- NOSOTROS -->
 <div id="nosotros-wrap" style="display:none">
@@ -489,14 +497,14 @@
         </div>
         <div class="hs-cards-zone">
           <div class="hs-cards" id="hsPasadoCards">
-            <div class="hs-card"><img class="hs-card-img" src="assets/canoa.jpg" alt="El viaje al origen"><div class="hs-card-body"><p class="hs-card-title">El viaje al origen</p><p class="hs-card-text">Hace 70 años, Don Francisco Galdino navegó el Amazonas con una visión clara: la selva no se posee, se protege. Llegó desde Brasil cargando solo sus herramientas de jardinero y unos valores inquebrantables.</p></div></div>
-            <div class="hs-card"><img class="hs-card-img" src="assets/rio.jpg" alt="El pulso del río"><div class="hs-card-body"><p class="hs-card-title">El pulso del río</p><p class="hs-card-text">Pedro y Francisco, apenas adolescentes, asumieron el legado entre crecidas y sequías. Aprendieron que el Amazonas no se doblega; se comprende. Cada día era una lección de resistencia y supervivencia.</p></div></div>
-            <div class="hs-card"><img class="hs-card-img" src="assets/guacamaya-antigua.jpg" alt="El jardín secreto"><div class="hs-card-body"><p class="hs-card-title">El jardín secreto</p><p class="hs-card-text">En 1980, lo que era un refugio privado se abrió al mundo. Sin industria turística, solo por el deseo de compartir un pedacito de paraíso. Fue el nacimiento de una hospitalidad nacida del amor a la tierra.</p></div></div>
+            <div class="hs-card"><img class="hs-card-img" src="assets/canoa.jpg" alt=""><div class="hs-card-body"><p class="hs-card-title">El viaje al origen</p><p class="hs-card-text">Hace 70 años, Don Francisco Galdino navegó el Amazonas con una visión clara: la selva no se posee, se protege. Llegó desde Brasil cargando solo sus herramientas de jardinero y unos valores inquebrantables.</p></div></div>
+            <div class="hs-card"><img class="hs-card-img" src="assets/rio.jpg" alt=""><div class="hs-card-body"><p class="hs-card-title">El pulso del río</p><p class="hs-card-text">Pedro y Francisco, apenas adolescentes, asumieron el legado entre crecidas y sequías. Aprendieron que el Amazonas no se doblega; se comprende. Cada día era una lección de resistencia y supervivencia.</p></div></div>
+            <div class="hs-card"><img class="hs-card-img" src="assets/guacamaya-antigua.jpg" alt=""><div class="hs-card-body"><p class="hs-card-title">El jardín secreto</p><p class="hs-card-text">En 1980, lo que era un refugio privado se abrió al mundo. Sin industria turística, solo por el deseo de compartir un pedacito de paraíso. Fue el nacimiento de una hospitalidad nacida del amor a la tierra.</p></div></div>
           </div>
           <div class="hs-cards" id="hsActualidadCards">
-            <div class="hs-card"><img class="hs-card-img" src="assets/mono.jpg" alt="Hectáreas de vida"><div class="hs-card-body"><p class="hs-card-title">Hectáreas de vida</p><p class="hs-card-text">Hoy, Victoria Regia es un santuario. Protegemos un ecosistema donde la fauna habita en completa libertad. Aquí, el respeto es la ley principal y la naturaleza dicta el ritmo de cada día.</p></div></div>
-            <div class="hs-card"><img class="hs-card-img" src="assets/loto.jpg" alt="El arte de pausar"><div class="hs-card-body"><p class="hs-card-title">El arte de pausar</p><p class="hs-card-text">Hemos transformado los antiguos senderos en puentes hacia el autodescubrimiento. No ofrecemos un simple recorrido; ofrecemos una terapia de contemplación en medio del nenúfar más grande del planeta.</p></div></div>
-            <div class="hs-card"><img class="hs-card-img" src="assets/tucan.jpg" alt="Pertenecer al Amazonas"><div class="hs-card-body"><p class="hs-card-title">Pertenecer al Amazonas</p><p class="hs-card-text">El legado de Don Francisco late en cada árbol y en cada visitante. Somos una ventana a los orígenes, un lugar donde el turista deja de ser extraño para recordar, por un instante, lo que significa pertenecer a este mundo.</p></div></div>
+            <div class="hs-card"><img class="hs-card-img" src="assets/mono.jpg" alt=""><div class="hs-card-body"><p class="hs-card-title">Hectáreas de vida</p><p class="hs-card-text">Hoy, Victoria Regia es un santuario. Protegemos un ecosistema donde la fauna habita en completa libertad. Aquí, el respeto es la ley principal y la naturaleza dicta el ritmo de cada día.</p></div></div>
+            <div class="hs-card"><img class="hs-card-img" src="assets/loto.jpg" alt=""><div class="hs-card-body"><p class="hs-card-title">El arte de pausar</p><p class="hs-card-text">Hemos transformado los antiguos senderos en puentes hacia el autodescubrimiento. No ofrecemos un simple recorrido; ofrecemos una terapia de contemplación en medio del nenúfar más grande del planeta.</p></div></div>
+            <div class="hs-card"><img class="hs-card-img" src="assets/tucan.jpg" alt=""><div class="hs-card-body"><p class="hs-card-title">Pertenecer al Amazonas</p><p class="hs-card-text">El legado de Don Francisco late en cada árbol y en cada visitante. Somos una ventana a los orígenes, un lugar donde el turista deja de ser extraño para recordar, por un instante, lo que significa pertenecer a este mundo.</p></div></div>
           </div>
         </div>
       </div>
@@ -542,7 +550,6 @@
   </div>
   <p class="exp-hint-txt">Selecciona la carta central para ver detalles</p>
 
-  <!-- MODAL -->
   <div class="exp-modal" id="expModal">
     <div class="exp-modal-backdrop" onclick="closeExpModal()"></div>
     <div class="exp-modal-inner">
@@ -553,19 +560,43 @@
   </div>
 </div>
 
-<!-- VALIDACIÓN -->
+<!-- ENCUÉNTRANOS -->
 <section id="seccion-validacion">
   <div class="val-inner">
+    <p class="val-eyebrow">Visítanos</p>
     <h2 class="val-title">Encuéntranos</h2>
+    <div class="val-line"></div>
     <p class="val-sub">A 15 minutos de Leticia · Amazonas, Colombia</p>
-    <div class="val-map">
-      <iframe src="https://www.google.com/maps?q=Reserva+Natural+Victoria+Regia,+La+Milagrosa,+Leticia,+Amazonas,+Colombia&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <div class="val-map-wrap">
+      <div class="val-map">
+        <iframe src="https://www.google.com/maps?q=Reserva+Natural+Victoria+Regia,+La+Milagrosa,+Leticia,+Amazonas,+Colombia&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="val-info-card">
+        <div class="val-info-block">
+          <span class="val-info-label">Ubicación</span>
+          <span class="val-info-val">Vereda La Milagrosa<br>Leticia, Amazonas — Colombia</span>
+        </div>
+        <div class="val-info-block">
+          <span class="val-info-label">Cómo llegar</span>
+          <span class="val-info-val">15 minutos desde el centro de Leticia<br>Vía fluvial o terrestre disponible</span>
+        </div>
+        <div class="val-info-block">
+          <span class="val-info-label">Horario</span>
+          <span class="val-info-val">Lunes a Domingo<br>8:00 AM — 6:00 PM</span>
+        </div>
+        <div class="val-info-cta">
+          <a href="https://maps.google.com/?q=Reserva+Natural+Victoria+Regia,+La+Milagrosa,+Leticia,+Amazonas,+Colombia" target="_blank" class="val-info-btn">Cómo llegar</a>
+          <a href="#" class="val-info-btn-ghost">Contactar</a>
+        </div>
+      </div>
     </div>
-    <p class="val-reviews-title">Lo que dicen nuestros visitantes</p>
+
     <div class="val-rating-badge">
+      <div class="val-rating-stars-big">★★★★★</div>
       <h3 class="val-rating-num">4.6</h3>
-      <p class="val-rating-count">156 reseñas en Google</p>
-      <a href="https://g.page/r/CUVK0FlWT61oEAE/review" target="_blank" class="val-rating-link">Dejar una reseña en Google</a>
+      <p class="val-rating-count">Basado en 156 reseñas de Google</p>
+      <a href="https://g.page/r/CUVK0FlWT61oEAE/review" target="_blank" class="val-rating-link">Deja tu reseña →</a>
     </div>
     <div id="valReviews"></div>
   </div>
@@ -581,7 +612,7 @@
         <p class="ft3">Turismo de naturaleza en el corazón de la Amazonía colombiana.</p>
       </div>
       <div class="fc"><p class="fc-t">Nosotros</p><a href="#">Nuestra Historia</a><a href="#">Manifiesto de Marca</a></div>
-      <div class="fc"><p class="fc-t">Experiencias</p><a href="#" onclick="openExperiencias();return false">Actividades y Planes</a><a href="#">Galería Inmersiva</a></div>
+      <div class="fc"><p class="fc-t">Experiencias</p><a href="#" onclick="openExperiencias();return false">Actividades y Planes</a></div>
       <div class="fc"><p class="fc-t">Operadores</p><a href="#">Directorio de Agencias</a><a href="#">Preguntas Frecuentes</a></div>
       <div class="fc"><p class="fc-t">Contacto</p><a href="#">Cómo Llegar</a><a href="#">Ubicación</a><a href="#">Escríbenos</a></div>
     </div>
@@ -593,11 +624,11 @@
 </footer>
 
 <script>
-/* ═══════ MENÚ ═══════ */
-const menus = {
+/* MENÚ */
+const menus={
   inicio:[{l:'Inicio',items:['Inicio','Encuéntranos']}],
   nosotros:[{l:'Nosotros',items:['Nuestra Historia','Manifiesto de Marca']}],
-  experiencias:[{l:'Experiencias',items:['Actividades y Planes','Galería Inmersiva']}],
+  experiencias:[{l:'Experiencias',items:['Actividades y Planes']}],
   operadores:[{l:'Para Agencias',items:['Directorio de Agencias','Preguntas Frecuentes']}],
   contacto:[{l:'Encuéntranos',items:['Cómo Llegar','Ubicación Física']},{l:'Escríbenos',items:['Contacto Directo']}]
 };
@@ -624,7 +655,7 @@ navLis.forEach(li=>{li.addEventListener('mouseenter',()=>openDropdown(li.dataset
 dp.addEventListener('mouseenter',()=>clearTimeout(dropdownTimer));
 dp.addEventListener('mouseleave',scheduleClose);
 
-/* ═══════ BUSCADOR ═══════ */
+/* BUSCADOR */
 const sp=document.getElementById('sp'),qi=document.getElementById('qi'),sc=document.getElementById('sc'),sr=document.getElementById('sr');
 const SEARCH_HINT='<p class="sh">Escribe para buscar secciones</p>';
 let searchOpen=false;
@@ -644,7 +675,7 @@ function navigateTo(label){
   else if(label==='Encuéntranos'){const sec=document.getElementById('seccion-validacion');if(nosotrosOpen){closeHistoria();setTimeout(()=>sec.scrollIntoView({behavior:'smooth'}),250)}else if(expOpen){closeExperiencias();setTimeout(()=>sec.scrollIntoView({behavior:'smooth'}),250)}else sec.scrollIntoView({behavior:'smooth'})}
   else if(label==='Nuestra Historia'){if(nosotrosOpen){window.scrollTo({top:0,behavior:'smooth'})}else{if(expOpen)closeExperiencias();openHistoria()}}
   else if(label==='Manifiesto de Marca'){if(nosotrosOpen){document.getElementById('manifiesto-marca').scrollIntoView({behavior:'smooth'})}else{if(expOpen)closeExperiencias();openHistoria();setTimeout(()=>document.getElementById('manifiesto-marca').scrollIntoView({behavior:'smooth'}),650)}}
-  else if(label==='Actividades y Planes'||label==='Galería Inmersiva'){if(nosotrosOpen)closeHistoria();openExperiencias()}
+  else if(label==='Actividades y Planes'){if(nosotrosOpen)closeHistoria();openExperiencias()}
 }
 
 qi.addEventListener('input',()=>{
@@ -659,9 +690,11 @@ sc.addEventListener('click',()=>{qi.value='';sc.classList.remove('v');sr.innerHT
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDropdown();closeSearch();closeExpModal()}});
 document.addEventListener('click',e=>{if(searchOpen&&!e.target.closest('#sp')&&!e.target.closest('#sBtn'))closeSearch()});
 
-/* ═══════ HISTORIA ═══════ */
+/* HISTORIA */
 let historyTab='actualidad';
 function openHistoria(){
+  closeDropdown();
+  document.body.classList.remove('blur-bg');
   const wrap=document.getElementById('nosotros-wrap');
   historyTab='actualidad';
   const bgA=document.getElementById('hsBgA'),bgB=document.getElementById('hsBgB');
@@ -677,7 +710,6 @@ function openHistoria(){
   document.querySelector('.hero').style.display='none';
   document.querySelector('footer').style.display='none';
   document.getElementById('seccion-validacion').style.display='none';
-  document.getElementById('sec-loto').style.display='none';
   document.getElementById('experiencias-wrap').style.display='none';
   requestAnimationFrame(()=>{
     const track=document.querySelector('.hs-track'),activeBtn=track&&track.querySelector('[data-val="'+historyTab+'"]');
@@ -700,7 +732,6 @@ function closeHistoria(){
   document.querySelector('.hero').style.display='';
   document.querySelector('footer').style.display='';
   document.getElementById('seccion-validacion').style.display='';
-  document.getElementById('sec-loto').style.display='';
 }
 function switchTab(tab){
   if(historyTab===tab)return;
@@ -733,31 +764,16 @@ function initManifestoReveal(){
   document.querySelectorAll('.mf-card').forEach(card=>observer.observe(card));
 }
 
-/* ═══════ EXPERIENCIAS ═══════ */
+/* EXPERIENCIAS */
 const actividades=[
-  {titulo:'Avistamiento de Aves y Primates',badge:'Fauna Silvestre',img:'assets/tucan.jpg',
-   duracion:'3 horas',horario:'Amanecer · 5:30 AM',
-   desc:'Recorre senderos elevados sobre el dosel de la selva mientras guías especializados te llevan al encuentro de más de 200 especies de aves tropicales, monos aulladores, titíes y otras especies en completa libertad.',
-   incluye:['Guía especializado','Binoculares','Seguro de actividad','Snack amazónico']},
-  {titulo:'Senderismo en la Selva',badge:'Naturaleza Viva',img:'assets/rio.jpg',
-   duracion:'4 horas',horario:'Mañana · 7:00 AM',
-   desc:'Adéntrate en 27 hectáreas de selva amazónica virgen. Aprende a identificar plantas medicinales, árboles centenarios y el ecosistema más biodiverso del planeta de la mano de guías con conocimiento ancestral.',
-   incluye:['Guía local','Kit de senderismo','Hidratación incluida','Seguro de actividad']},
-  {titulo:'Tour Victoria Regia',badge:'La Flor Gigante',img:'assets/loto.jpg',
-   duracion:'2 horas',horario:'Tarde · 4:00 PM',
-   desc:'Contempla de cerca la Victoria Amazónica, el nenúfar más grande del planeta con hojas que superan los 2 metros de diámetro. Una experiencia única e irrepetible en el corazón del Amazonas colombiano.',
-   incluye:['Guía botánico','Pasarela privada','Sesión fotográfica','Historia y biología']},
-  {titulo:'Canoa en el Lago',badge:'Aguas Amazónicas',img:'assets/canoa.jpg',
-   duracion:'2 horas',horario:'Atardecer · 5:00 PM',
-   desc:'Navega en canoa tradicional sobre aguas cristalinas rodeadas de nenúfares gigantes. El reflejo del atardecer sobre el lago crea una atmósfera mágica e irrepetible que solo Victoria Regia puede ofrecer.',
-   incluye:['Canoa y remos','Chaleco salvavidas','Guía de navegación','Fotografía']},
-  {titulo:'Tour Nocturno',badge:'La Selva de Noche',img:'assets/mono.jpg',
-   duracion:'2.5 horas',horario:'Noche · 7:00 PM',
-   desc:'Descubre el lado más misterioso de la selva amazónica. Observa ranas venenosas, insectos bioluminiscentes y la sinfonía nocturna de un ecosistema que cobra nueva vida al caer el sol.',
-   incluye:['Guía nocturno','Linterna especializada','Repelente natural','Primeros auxilios']}
+  {titulo:'Avistamiento de Aves y Primates',badge:'Fauna Silvestre',img:'assets/tucan.jpg',duracion:'3 horas',horario:'Amanecer · 5:30 AM',desc:'Recorre senderos elevados sobre el dosel de la selva mientras guías especializados te llevan al encuentro de más de 200 especies de aves tropicales, monos aulladores, titíes y otras especies en completa libertad.',incluye:['Guía especializado','Binoculares','Seguro de actividad','Snack amazónico']},
+  {titulo:'Senderismo en la Selva',badge:'Naturaleza Viva',img:'assets/rio.jpg',duracion:'4 horas',horario:'Mañana · 7:00 AM',desc:'Adéntrate en 27 hectáreas de selva amazónica virgen. Aprende a identificar plantas medicinales, árboles centenarios y el ecosistema más biodiverso del planeta.',incluye:['Guía local','Kit de senderismo','Hidratación incluida','Seguro de actividad']},
+  {titulo:'Tour Victoria Regia',badge:'La Flor Gigante',img:'assets/loto.jpg',duracion:'2 horas',horario:'Tarde · 4:00 PM',desc:'Contempla de cerca la Victoria Amazónica, el nenúfar más grande del planeta con hojas que superan los 2 metros de diámetro. Una experiencia única e irrepetible.',incluye:['Guía botánico','Pasarela privada','Sesión fotográfica','Historia y biología']},
+  {titulo:'Canoa en el Lago',badge:'Aguas Amazónicas',img:'assets/canoa.jpg',duracion:'2 horas',horario:'Atardecer · 5:00 PM',desc:'Navega en canoa tradicional sobre aguas cristalinas rodeadas de nenúfares gigantes. El reflejo del atardecer sobre el lago crea una atmósfera mágica.',incluye:['Canoa y remos','Chaleco salvavidas','Guía de navegación','Fotografía']},
+  {titulo:'Tour Nocturno',badge:'La Selva de Noche',img:'assets/mono.jpg',duracion:'2.5 horas',horario:'Noche · 7:00 PM',desc:'Descubre el lado más misterioso de la selva amazónica. Observa ranas venenosas, insectos bioluminiscentes y la sinfonía nocturna del Amazonas.',incluye:['Guía nocturno','Linterna especializada','Repelente natural','Primeros auxilios']}
 ];
 
-let expIndex=0,expAutoTimer=null,expInitialized=false;
+let expIndex=0,expInitialized=false;
 
 function openExperiencias(){
   closeDropdown();
@@ -767,23 +783,15 @@ function openExperiencias(){
   document.querySelector('.hero').style.display='none';
   document.querySelector('footer').style.display='none';
   document.getElementById('seccion-validacion').style.display='none';
-  document.getElementById('sec-loto').style.display='none';
   document.getElementById('nosotros-wrap').style.display='none';
-  // Forzar reflow para desbloquear scroll
-  requestAnimationFrame(()=>{
-    document.body.style.overflow='';
-    window.scrollTo(0,0);
-  });
+  requestAnimationFrame(()=>{document.body.style.overflow='';window.scrollTo(0,0)});
   if(!expInitialized){initExpCarousel();expInitialized=true}
-  startExpAuto();
 }
 function closeExperiencias(){
   document.getElementById('experiencias-wrap').style.display='none';
   document.querySelector('.hero').style.display='';
   document.querySelector('footer').style.display='';
   document.getElementById('seccion-validacion').style.display='';
-  document.getElementById('sec-loto').style.display='';
-  stopExpAuto();
 }
 
 function getCardPos(i){
@@ -793,83 +801,48 @@ function getCardPos(i){
   return d;
 }
 
+function setCardPosition(card,p){
+  card.className='exp-card';
+  if(p===0)card.classList.add('pos-center');
+  else if(p===1)card.classList.add('pos-right1');
+  else if(p===2||p===-(actividades.length-2))card.classList.add('pos-right2');
+  else if(p===-1)card.classList.add('pos-left1');
+  else if(p===-2||p===(actividades.length-2))card.classList.add('pos-left2');
+  else card.classList.add('pos-hidden');
+}
+
 function updateExpCarousel(){
-  document.querySelectorAll('.exp-card').forEach((card,i)=>{
-    const p=getCardPos(i);
-    card.className='exp-card';
-    card.style.transform='';
-    card.style.transition='';
-    if(p===0)card.classList.add('pos-center');
-    else if(p===1)card.classList.add('pos-right1');
-    else if(p===2||p===-(actividades.length-2))card.classList.add('pos-right2');
-    else if(p===-1)card.classList.add('pos-left1');
-    else if(p===-2||p===(actividades.length-2))card.classList.add('pos-left2');
-    else card.classList.add('pos-hidden');
-  });
+  document.querySelectorAll('.exp-card').forEach((card,i)=>setCardPosition(card,getCardPos(i)));
   document.querySelectorAll('.exp-dot').forEach((d,i)=>d.classList.toggle('active',i===expIndex));
 }
 
 function expNavigate(dir){
   expIndex=((expIndex+dir)%actividades.length+actividades.length)%actividades.length;
   updateExpCarousel();
-  resetExpAuto();
 }
-
-function startExpAuto(){}
-function stopExpAuto(){}
-function resetExpAuto(){}
 
 function initExpCarousel(){
   const track=document.getElementById('expTrack'),dots=document.getElementById('expDots');
   actividades.forEach((act,i)=>{
     const card=document.createElement('div');
     card.className='exp-card pos-hidden';
-    card.innerHTML=`
-      <img class="exp-card-img" src="${act.img}" alt="${act.titulo}">
-      <div class="exp-card-body">
-        <p class="exp-card-badge">${act.badge}</p>
-        <h3 class="exp-card-title">${act.titulo}</h3>
-        <p class="exp-card-text">${act.desc.substring(0,90)}…</p>
-        <div class="exp-card-footer">
-          <span class="exp-card-meta">${act.duracion}</span>
-          <span class="exp-card-meta">${act.horario}</span>
-        </div>
-      </div>
-      <div class="exp-center-hint">Ver detalles →</div>
-    `;
+    card.innerHTML=`<img class="exp-card-img" src="${act.img}" alt="${act.titulo}"><div class="exp-card-body"><p class="exp-card-badge">${act.badge}</p><h3 class="exp-card-title">${act.titulo}</h3><p class="exp-card-text">${act.desc.substring(0,110)}…</p><div class="exp-card-footer"><span class="exp-card-meta">${act.duracion}</span><span class="exp-card-meta">${act.horario}</span></div></div>`;
     card.addEventListener('click',()=>{
       const pos=getCardPos(i);
-      if(pos===0){stopExpAuto();openExpModal(i)}
+      if(pos===0)openExpModal(i);
       else if(pos>0)expNavigate(1);
       else expNavigate(-1);
     });
     track.appendChild(card);
     const dot=document.createElement('button');
     dot.className='exp-dot'+(i===0?' active':'');
-    dot.addEventListener('click',()=>{expIndex=i;updateExpCarousel();resetExpAuto()});
+    dot.addEventListener('click',()=>{expIndex=i;updateExpCarousel()});
     dots.appendChild(dot);
   });
-
-  // Animación entrada fluida: cards suben desde pos-hidden a su posición real, stagger
   const cards=document.querySelectorAll('.exp-card');
   cards.forEach((card,i)=>{
-    setTimeout(()=>{
-      const p=getCardPos(i);
-      card.className='exp-card';
-      if(p===0)card.classList.add('pos-center');
-      else if(p===1)card.classList.add('pos-right1');
-      else if(p===2||p===-(actividades.length-2))card.classList.add('pos-right2');
-      else if(p===-1)card.classList.add('pos-left1');
-      else if(p===-2||p===(actividades.length-2))card.classList.add('pos-left2');
-      else card.classList.add('pos-hidden');
-    }, 120 + i*110);
+    setTimeout(()=>setCardPosition(card,getCardPos(i)),120+i*120);
   });
-
-  // Dots y nav después de que todas las cartas hayan entrado
-  setTimeout(()=>{
-    document.querySelectorAll('.exp-dot').forEach((d,i)=>d.classList.toggle('active',i===expIndex));
-  }, 120 + actividades.length*110);
-
   document.getElementById('expPrev').addEventListener('click',()=>expNavigate(-1));
   document.getElementById('expNext').addEventListener('click',()=>expNavigate(1));
 }
@@ -878,30 +851,19 @@ function openExpModal(i){
   const act=actividades[i];
   const modal=document.getElementById('expModal');
   document.getElementById('expModalImg').innerHTML=`<img src="${act.img}" alt="${act.titulo}"><div class="exp-modal-img-grad"></div>`;
-  document.getElementById('expModalInfo').innerHTML=`
-    <p class="exp-modal-badge">${act.badge}</p>
-    <h2 class="exp-modal-title">${act.titulo}</h2>
-    <p class="exp-modal-desc">${act.desc}</p>
-    <div class="exp-modal-metas">
-      <div class="exp-modal-meta-item"><span class="exp-modal-meta-label">Duración</span><span class="exp-modal-meta-val">${act.duracion}</span></div>
-      <div class="exp-modal-meta-item"><span class="exp-modal-meta-label">Horario</span><span class="exp-modal-meta-val">${act.horario}</span></div>
-    </div>
-    <p class="exp-modal-inc-label">Incluye</p>
-    <div class="exp-modal-incluye">${act.incluye.map(x=>`<div class="exp-modal-inc-item">${x}</div>`).join('')}</div>
-    <a href="#" class="exp-modal-cta">Contactar</a>
-  `;
+  document.getElementById('expModalInfo').innerHTML=`<p class="exp-modal-badge">${act.badge}</p><h2 class="exp-modal-title">${act.titulo}</h2><p class="exp-modal-desc">${act.desc}</p><div class="exp-modal-metas"><div class="exp-modal-meta-item"><span class="exp-modal-meta-label">Duración</span><span class="exp-modal-meta-val">${act.duracion}</span></div><div class="exp-modal-meta-item"><span class="exp-modal-meta-label">Horario</span><span class="exp-modal-meta-val">${act.horario}</span></div></div><p class="exp-modal-inc-label">Incluye</p><div class="exp-modal-incluye">${act.incluye.map(x=>`<div class="exp-modal-inc-item">${x}</div>`).join('')}</div><a href="#" class="exp-modal-cta">Contactar</a>`;
   modal.classList.remove('closing');
   modal.classList.add('open');
 }
 
 function closeExpModal(){
   const modal=document.getElementById('expModal');
+  if(!modal.classList.contains('open'))return;
   modal.classList.add('closing');
-  setTimeout(()=>{modal.classList.remove('open','closing')},380);
-  startExpAuto();
+  setTimeout(()=>{modal.classList.remove('open','closing')},400);
 }
 
-/* ═══════ LINKS NAV ═══════ */
+/* LINKS NAV */
 document.addEventListener('click',(e)=>{
   const a=e.target.closest('a');
   if(!a)return;
@@ -913,10 +875,11 @@ document.addEventListener('click',(e)=>{
   else if(txt==='Encuéntranos'){e.preventDefault();closeDropdown();const sec=document.getElementById('seccion-validacion');if(nosotrosOpen){closeHistoria();setTimeout(()=>sec.scrollIntoView({behavior:'smooth'}),250)}else if(expOpen){closeExperiencias();setTimeout(()=>sec.scrollIntoView({behavior:'smooth'}),250)}else sec.scrollIntoView({behavior:'smooth'})}
   else if(txt==='Nuestra Historia'){e.preventDefault();closeDropdown();if(expOpen)closeExperiencias();if(nosotrosOpen){window.scrollTo({top:0,behavior:'smooth'})}else openHistoria()}
   else if(txt==='Manifiesto de Marca'){e.preventDefault();closeDropdown();if(expOpen)closeExperiencias();if(nosotrosOpen){document.getElementById('manifiesto-marca').scrollIntoView({behavior:'smooth'})}else{openHistoria();setTimeout(()=>document.getElementById('manifiesto-marca').scrollIntoView({behavior:'smooth'}),650)}}
+  else if(txt==='Actividades y Planes'){e.preventDefault();closeDropdown();if(nosotrosOpen)closeHistoria();openExperiencias()}
 });
 function handleInicio(){const wrap=document.getElementById('nosotros-wrap'),expWrap=document.getElementById('experiencias-wrap');if(wrap&&wrap.style.display!=='none')closeHistoria();if(expWrap&&expWrap.style.display!=='none')closeExperiencias();window.scrollTo({top:0,behavior:'smooth'})}
 
-/* ═══════ HAMBURGUESA ═══════ */
+/* HAMBURGUESA */
 const hBtn=document.getElementById('hBtn'),hIco=document.getElementById('hIco'),mobMenu=document.getElementById('mobMenu');
 let mobOpen=false;
 const HL='<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',HC='<line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/>';
@@ -925,36 +888,31 @@ function toggleMob(btn){const sec=btn.closest('.mob-section'),was=sec.classList.
 document.querySelectorAll('.mob-sub a').forEach(a=>{a.addEventListener('click',()=>{if(mobOpen){mobOpen=false;hIco.innerHTML=HL;mobMenu.classList.remove('open');document.body.classList.remove('blur-bg')}})});
 navLis.forEach(li=>{li.addEventListener('click',()=>{if(window.innerWidth<=680){if(currentDropdown===li.dataset.k){closeDropdown();return}openDropdown(li.dataset.k)}})});
 
-/* ═══════ RESEÑAS ═══════ */
+/* RESEÑAS */
 (function(){
   const reviews=[
-    {stars:'★★★★★',text:'La reserva es muy bella, la explicación de las personas que están son adecuadas, las instalaciones son aseadas. Aquí ofrecen caminatas de día y noche.',author:'Yineth Perez (Local Guide)'},
-    {stars:'★★★★★',text:'Esta reserva es magia pura para el alma. El concepto compasivo con la fauna nativa. Tiene un rol educativo muy importante para visitar el Amazonas.',author:'Diana Rodriguez (Local Guide)'},
-    {stars:'★★★★★',text:'Espectacular parada en tu visita al Amazonas. Finca a la orilla del mismo río, puedes visitar a través de una preciosa pasarela de madera.',author:'Peibol (Local Guide)'}
+    {stars:'★★★★★',text:'La reserva es muy bella, la explicación de las personas que están son adecuadas, las instalaciones son aseadas. Aquí ofrecen caminatas de día y noche.',author:'Yineth Perez',role:'Local Guide en Google'},
+    {stars:'★★★★★',text:'Esta reserva es magia pura para el alma. El concepto compasivo con la fauna nativa. Tiene un rol educativo muy importante para visitar el Amazonas.',author:'Diana Rodriguez',role:'Local Guide en Google'},
+    {stars:'★★★★★',text:'Espectacular parada en tu visita al Amazonas. Finca a la orilla del mismo río, puedes visitar a través de una preciosa pasarela de madera.',author:'Peibol',role:'Local Guide en Google'}
   ];
-  document.getElementById('valReviews').innerHTML=reviews.map(r=>`<div class="val-review"><div class="val-review-stars">${r.stars}</div><p class="val-review-text">"${r.text}"</p><p class="val-review-author">— ${r.author}</p></div>`).join('');
+  document.getElementById('valReviews').innerHTML=reviews.map(r=>`<div class="val-review"><div class="val-review-quote">"</div><div class="val-review-stars">${r.stars}</div><p class="val-review-text">${r.text}</p><div class="val-review-author-wrap"><div class="val-review-avatar">${r.author.charAt(0)}</div><div class="val-review-author">${r.author}<small>${r.role}</small></div></div></div>`).join('');
+  const observer=new IntersectionObserver((entries)=>{entries.forEach((entry,i)=>{if(entry.isIntersecting){setTimeout(()=>entry.target.classList.add('revealed'),i*120);observer.unobserve(entry.target)}})},{threshold:0.15});
+  document.querySelectorAll('.val-review').forEach(r=>observer.observe(r));
 })();
 
-/* ═══════ CURSOR ═══════ */
+/* CURSOR — solo desktop */
 (function(){
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
   const dot=document.getElementById('curDot'),ring=document.getElementById('curRing');
   let rx=-100,ry=-100,mx=-100,my=-100,started=false;
-
-  // Ocultar hasta primer movimiento real
-  dot.style.opacity='0'; ring.style.opacity='0';
-
+  dot.style.opacity='0';ring.style.opacity='0';
   document.addEventListener('mousemove',e=>{
-    mx=e.clientX; my=e.clientY;
-    dot.style.left=mx+'px'; dot.style.top=my+'px';
-    if(!started){ rx=mx; ry=my; started=true; dot.style.opacity=''; ring.style.opacity='' }
+    mx=e.clientX;my=e.clientY;
+    dot.style.left=mx+'px';dot.style.top=my+'px';
+    if(!started){rx=mx;ry=my;started=true;dot.style.opacity='';ring.style.opacity=''}
   });
-
   function lerp(a,b,t){return a+(b-a)*t}
-  (function loop(){
-    rx=lerp(rx,mx,.12); ry=lerp(ry,my,.12);
-    ring.style.left=rx+'px'; ring.style.top=ry+'px';
-    requestAnimationFrame(loop);
-  })();
+  (function loop(){rx=lerp(rx,mx,.12);ry=lerp(ry,my,.12);ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
   const inter='a,button,input,textarea,[role="button"]';
   document.addEventListener('mouseover',e=>{if(e.target.closest(inter))document.body.classList.add('cur-hover')});
   document.addEventListener('mouseout',e=>{if(e.target.closest(inter))document.body.classList.remove('cur-hover')});
@@ -964,38 +922,19 @@ navLis.forEach(li=>{li.addEventListener('click',()=>{if(window.innerWidth<=680){
   document.addEventListener('mouseenter',()=>{dot.style.opacity='';ring.style.opacity=''});
 })();
 
-/* ═══════ PERSISTENCIA DE ESTADO ═══════ */
+/* PERSISTENCIA */
 (function(){
-  function saveState(s){ localStorage.setItem('vr-seccion', s); history.replaceState(null,'','#'+s) }
-  function clearState(){ localStorage.removeItem('vr-seccion'); history.replaceState(null,'','#inicio') }
-
-  // Parchear openHistoria y openExperiencias para guardar estado
-  const _openH = openHistoria, _openE = openExperiencias;
-  window.openHistoria = function(){ _openH(); saveState('nosotros') };
-  window.openExperiencias = function(){ _openE(); saveState('experiencias') };
-
-  // Parchear closes para limpiar estado
-  const _closeH = closeHistoria, _closeE = closeExperiencias;
-  window.closeHistoria = function(){ _closeH(); clearState() };
-  window.closeExperiencias = function(){ _closeE(); clearState() };
-
-  // Restaurar al cargar
-  const saved = localStorage.getItem('vr-seccion') || location.hash.replace('#','');
-  if(saved === 'nosotros') openHistoria();
-  else if(saved === 'experiencias') openExperiencias();
-})();
-(function(){
-  const sec=document.getElementById('sec-loto'),bg=sec&&sec.querySelector('.sl-bg');
-  if(!sec||!bg)return;
-  sec.addEventListener('mousemove',e=>{
-    const r=sec.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-    bg.style.transform=`rotateX(${-y*12}deg) rotateY(${x*12}deg)`;
-  });
-  sec.addEventListener('mouseleave',()=>{
-    bg.style.transition='transform .6s cubic-bezier(.25,1,.5,1)';
-    bg.style.transform='rotateX(0deg) rotateY(0deg)';
-    setTimeout(()=>bg.style.transition='transform .08s linear',650);
-  });
+  function saveState(s){localStorage.setItem('vr-seccion',s);history.replaceState(null,'','#'+s)}
+  function clearState(){localStorage.removeItem('vr-seccion');history.replaceState(null,'','#inicio')}
+  const _openH=openHistoria,_openE=openExperiencias;
+  window.openHistoria=function(){_openH();saveState('nosotros')};
+  window.openExperiencias=function(){_openE();saveState('experiencias')};
+  const _closeH=closeHistoria,_closeE=closeExperiencias;
+  window.closeHistoria=function(){_closeH();clearState()};
+  window.closeExperiencias=function(){_closeE();clearState()};
+  const saved=localStorage.getItem('vr-seccion')||location.hash.replace('#','');
+  if(saved==='nosotros')openHistoria();
+  else if(saved==='experiencias')openExperiencias();
 })();
 </script>
 </body>
