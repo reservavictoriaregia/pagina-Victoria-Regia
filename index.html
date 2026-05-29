@@ -2,6 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <script>
+    var sec = sessionStorage.getItem('vr-seccion') || location.hash.replace('#','');
+    if(sec && sec !== 'inicio' && sec !== '') document.documentElement.style.setProperty('--hide-home', 'none');
+  </script>
+  <style>
+    html[style*="--hide-home"] .hero, html[style*="--hide-home"] footer, html[style*="--hide-home"] #seccion-validacion { display: var(--hide-home) !important; }
+  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO básico -->
@@ -1266,17 +1273,25 @@ function closeContacto(){
   showMainSections();
 }
 (function(){
-  function saveState(s){localStorage.setItem('vr-seccion',s);history.replaceState(null,'','#'+s)}
-  function clearState(){localStorage.removeItem('vr-seccion');history.replaceState(null,'','#inicio')}
-  const _openH=openHistoria,_openE=openExperiencias;
+  function saveState(s){sessionStorage.setItem('vr-seccion',s);history.replaceState(null,'','#'+s)}
+  function clearState(){sessionStorage.setItem('vr-seccion','inicio');history.replaceState(null,'','#inicio');document.documentElement.style.removeProperty('--hide-home');}
+
+  const _openH=openHistoria, _openE=openExperiencias, _openO=openOperadores, _openF=openFaq, _openC=openContacto;
   window.openHistoria=function(){_openH();saveState('nosotros')};
   window.openExperiencias=function(){_openE();saveState('experiencias')};
-  const _closeH=closeHistoria,_closeE=closeExperiencias;
-  window.closeHistoria=function(){_closeH();clearState()};
-  window.closeExperiencias=function(){_closeE();clearState()};
-  const saved=localStorage.getItem('vr-seccion')||location.hash.replace('#','');
-  if(saved==='nosotros')openHistoria();
-  else if(saved==='experiencias')openExperiencias();
+  window.openOperadores=function(){_openO();saveState('operadores')};
+  window.openFaq=function(){_openF();saveState('faq')};
+  window.openContacto=function(){_openC();saveState('contacto')};
+
+  const _handleInicio = handleInicio;
+  window.handleInicio = function(){_handleInicio();clearState()};
+
+  const saved = sessionStorage.getItem('vr-seccion') || location.hash.replace('#','');
+  if(saved==='nosotros') openHistoria();
+  else if(saved==='experiencias') openExperiencias();
+  else if(saved==='operadores') openOperadores();
+  else if(saved==='faq') openFaq();
+  else if(saved==='contacto') openContacto();
 })();
 </script>
 </body>
