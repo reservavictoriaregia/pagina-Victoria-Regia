@@ -367,6 +367,17 @@
     .val-title{font-size:1.5rem}
     .ft2{grid-template-columns:1fr}
   }
+
+  /* DESACTIVAR CURSOR PERSONALIZADO EN DISPOSITIVOS TÁCTILES */
+  @media (pointer: coarse), (max-width: 680px) {
+    * { 
+      cursor: auto !important; 
+    }
+    .cur-dot, .cur-ring { 
+      display: none !important; 
+    }
+  }
+
   </style>
 </head>
 <body>
