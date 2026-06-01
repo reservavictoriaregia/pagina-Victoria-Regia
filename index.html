@@ -548,8 +548,10 @@
   .exp-card.pos-left2{transform:translateX(-400px) rotateY(65deg) scale(.55);opacity:.2}
 }
 
-/* ─── LANDSCAPE PHONE (ancho >680px, alto <500px) ─── */
+/* ─── LANDSCAPE PHONE ─── */
 @media(orientation:landscape) and (max-height:500px){
+
+  /* HERO */
   .hero{min-height:100dvh}
   .hero-band{padding:10px 24px 14px}
   .hlo img{width:clamp(110px,30dvh,180px)}
@@ -557,28 +559,129 @@
   .hero-btns{margin-top:10px;gap:10px}
   .hero-btn-primary,.hero-btn-secondary{padding:10px 24px;font-size:11px}
 
+  /* NUESTRA HISTORIA */
   .hs-wrap{padding:calc(var(--nh)+10px) 0 28px;min-height:100dvh}
-  .hs-title{font-size:1.7rem;margin-bottom:14px}
-  .hs-cards-zone{min-height:320px}
-  .hs-card-img{height:140px}
-  .hs-cards{gap:12px;padding:6px 16px 14px;margin-top:6px}
+  .hs-title{font-size:1.4rem;margin-bottom:12px}
+  .hs-opt{padding:7px 18px;font-size:11px}
+  .hs-cards-zone{min-height:unset}
+  .hs-cards{gap:12px;padding:8px 16px 16px;margin-top:8px}
+  .hs-card{min-width:220px}
+  .hs-card-img{height:120px}
+  .hs-card-title{font-size:13px}
+  .hs-card-text{font-size:11px;line-height:1.5}
+  .hs-card-tag{font-size:10px;padding:3px 8px}
 
-  .mf-section{padding:calc(var(--nh)+24px) 0 40px}
+  /* MANIFIESTO */
+  .mf-section{padding:calc(var(--nh)+16px) 0 32px}
+  .mf-inner{padding:0 16px}
+  .mf-header{margin-bottom:18px}
+  .mf-title{font-size:1.4rem}
+  .mf-p{font-size:12px;line-height:1.6;margin-bottom:12px}
+  .mf-cards{flex-direction:row;gap:10px;margin-top:16px}
+  .mf-card-body{padding:14px 12px}
+  .mf-card-title{font-size:11px;margin-bottom:8px}
+  .mf-card-text{font-size:11px;line-height:1.6}
 
-  .exp-header{padding:calc(var(--nh)+16px) 20px 12px}
-  .exp-scene{min-height:320px}
-  .exp-card{height:320px}
-  .exp-card-img{height:130px}
-  .exp-card-body{padding:8px 14px 12px}
-  .exp-card-title{font-size:14px}
-  .exp-card-text{font-size:11.5px;max-height:4.4em}
+  /* EXPERIENCIAS */
+  .exp-header{padding:calc(var(--nh)+8px) 20px 8px}
+  .exp-eyebrow{font-size:9px;margin-bottom:6px}
+  .exp-title{font-size:1.6rem;margin-bottom:4px}
+  .exp-sub{font-size:11px}
+  .exp-scene{min-height:280px}
+  .exp-track{width:52vw;max-width:260px;height:280px}
+  .exp-card{width:52vw;max-width:260px;height:280px}
+  .exp-card-img{height:110px}
+  .exp-card-body{padding:8px 12px 10px}
+  .exp-card-badge{font-size:9px;margin-bottom:4px}
+  .exp-card-title{font-size:13px;margin-bottom:4px}
+  .exp-card-text{font-size:11px;max-height:3.6em}
+  .exp-card-footer{padding-top:6px;gap:8px}
+  .exp-card-meta{font-size:10px}
+  .exp-nav{padding:10px 24px 8px;gap:14px}
+  .exp-btn{width:34px;height:34px}
+  .exp-hint-txt{font-size:10px;padding:0 24px 12px}
 
+  /* MODAL EXPERIENCIAS */
+  .exp-modal-inner{flex-direction:row;max-height:90dvh}
+  .exp-modal-img{width:35%;height:auto}
+  .exp-modal-info{padding:16px 18px}
+  .exp-modal-title{font-size:1rem;margin-bottom:10px}
+  .exp-modal-desc{font-size:12px;line-height:1.6;margin-bottom:12px}
+  .exp-modal-metas{gap:14px;margin-bottom:12px}
+  .exp-modal-meta-label{font-size:8px}
+  .exp-modal-meta-val{font-size:11px}
+  .exp-modal-inc-label{font-size:8px;margin-bottom:6px}
+  .exp-modal-incluye{gap:4px;margin-bottom:14px}
+  .exp-modal-inc-item{font-size:11px}
+  .exp-modal-cta{padding:10px 20px;font-size:10px}
+
+  /* ENCUÉNTRANOS */
   #seccion-validacion{padding:44px 0 52px}
-  .val-map,.val-map iframe{min-height:220px}
+  .val-eyebrow{margin-bottom:6px}
+  .val-title{font-size:1.4rem}
+  .val-sub{font-size:11px;margin-bottom:20px}
+  .val-map-wrap{grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+  .val-map,.val-map iframe{min-height:200px;border-radius:14px}
+  .val-info-card{padding:16px;gap:14px}
+  .val-info-label{font-size:9px}
+  .val-info-val{font-size:12px}
+  .val-info-btn,.val-info-btn-ghost{padding:10px 16px;font-size:10px}
+  .val-rating-badge{margin-bottom:20px;gap:4px}
+  .val-rating-stars-big{font-size:16px;margin-bottom:2px}
+  .val-rating-num{font-size:2rem}
+  .val-rating-count{font-size:11px;margin-bottom:8px}
+  .val-rating-link{font-size:11px;padding:6px 14px}
+  #valReviews{grid-template-columns:repeat(3,1fr);gap:12px}
+  .val-review{padding:16px 14px;gap:8px}
+  .val-review-quote{font-size:32px;top:10px;right:12px}
+  .val-review-stars{font-size:11px}
+  .val-review-text{font-size:11.5px}
+  .val-review-avatar{width:28px;height:28px;font-size:12px}
+  .val-review-author{font-size:11px}
 
-  .ct-card img{height:160px}
-  .ct-inner{padding:calc(var(--nh)+20px) 20px 36px}
+  /* OPERADORES */
+  #operadores-wrap{padding:calc(var(--nh)+20px) 0 32px}
+  .op-header{margin-bottom:20px}
+  .op-eyebrow{font-size:9px;padding:4px 10px}
+  .op-title{font-size:1.4rem;margin:8px 0 6px}
+  .op-sub{font-size:12px}
+  .op-list{gap:6px;margin-bottom:16px}
+  .op-row{padding:14px 18px}
+  .op-row-name{font-size:13px}
+  .op-row-type{font-size:10px}
+  .op-row-desc{font-size:11.5px;line-height:1.5}
+  .op-row-link{font-size:10px;padding:7px 14px}
+  .op-cta{padding:16px 20px}
+  .op-cta p{font-size:12px;margin-bottom:10px}
+  .op-cta-btn{padding:9px 20px;font-size:10px}
 
+  /* FAQ */
+  #faq-wrap{padding:calc(var(--nh)+20px) 0 32px}
+  .faq-header{margin-bottom:20px}
+  .faq-eyebrow{font-size:9px;padding:4px 10px}
+  .faq-title{font-size:1.4rem;margin:8px 0 6px}
+  .faq-sub{font-size:12px}
+  .faq-category{grid-template-columns:160px 1fr;margin-bottom:10px;border-radius:14px}
+  .faq-cat-label{padding:16px 14px}
+  .faq-cat-name{font-size:13px;margin-bottom:4px}
+  .faq-cat-desc{font-size:11px;line-height:1.5}
+  .faq-cat-items{padding:6px 12px}
+  .faq-q{padding:11px 12px}
+  .faq-q-text{font-size:12px}
+  .faq-a-inner p{font-size:11.5px;line-height:1.7}
+  .faq-icon{width:18px;height:18px}
+
+  /* CONTACTO */
+  #contacto-wrap{align-items:flex-start}
+  .ct-inner{padding:calc(var(--nh)+14px) 20px 20px;justify-content:center;align-items:flex-start}
+  .ct-card{max-width:380px;display:flex;flex-direction:row;border-radius:16px}
+  .ct-card img{width:40%;height:auto;object-position:center}
+  .ct-card-body{padding:16px 18px;text-align:left;flex:1}
+  .ct-eyebrow{font-size:9px;margin-bottom:6px}
+  .ct-title{font-size:1rem;margin-bottom:8px}
+  .ct-sub{font-size:11.5px;line-height:1.6;margin-bottom:14px}
+
+  /* FOOTER */
   footer{padding:30px 0 18px}
 }
 
